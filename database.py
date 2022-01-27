@@ -40,7 +40,9 @@ class PillsBase:
     async def delete_user_drug(self, user_id: int, drug_name: str):
         """Удаление напоминания пользователя"""
         with self.connection:
+          if self.exist_drug(user_id=user_id, drug_name=drug_name):
             return self.cursor.execute("DELETE FROM Pills WHERE USER_ID = (SELECT ID FROM Users WHERE TELEGRAM_ID = ?) AND DRUG_NAME = ?", (user_id, drug_name))
+          return None
 
 
 
