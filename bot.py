@@ -398,17 +398,19 @@ async def callback_choose(callback_query: types.CallbackQuery, state: FSMContext
         await state.finish()
     logging.info(f'FSM Callback Query ~ Catched by <{callback_choose.__name__}> func ~ From {callback_query.from_user.id} : @{callback_query.from_user.username}')
 
-@dp.callback_query_handler(lambda call: call.data == 'menu',state='*')
-async def callback_fsm_menu(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(lambda call: call.data == 'menu' or call.data == 'edit', state='*')
+async def callback_fsm_menu_edit(callback_query: types.CallbackQuery, state: FSMContext):
     """Вывод главного меню, через callback"""
 
-    # ОБНУЛЕНИЕ СОСТОНИЯ, ВЫВОД ГЛАВНОГО МЕНЮ, ЧЕРЕЗ РЕДАКТИРОВАНИЯ СООБЩЕНИЯ ЧЬЕ ID ВЗЯТО ИЗ КЭША
-
-    await bot.edit_message_text(chat_id=callback_query.from_user.id, message_id=callback_query.message.message_id,text=dialog.mainMenu,reply_markup=keyboard.MainMenu_keyboard)
-    
+    # ОБНУЛЕНИЕ СОСТОНИЯ, ВЫВОД ГЛАВНОГО МЕНЮ / НАСТРОЕК
     await state.finish()
-    await bot.answer_callback_query(callback_query.id)
-    logging.info(f'FSM Callback Query ~ Catched by <{callback_fsm_menu.__name__}> func ~ From {callback_query.from_user.id} : @{callback_query.from_user.username}')
+
+    if callback_query.data == 'menu':
+      await menu_button(callback_query)
+    if callback_query.data == 'edit':
+      await edit_plan(callback_query)
+  
+    logging.info(f'FSM Callback Query ~ Catched by <{callback_fsm_menu_edit.__name__}> func ~ From {callback_fsm_menu_edit.from_user.id} : @{callback_fsm_menu_edit.from_user.username}')
 
 async def utc_exist(user_id: int, state: FSMContext):
     addplan_id_message = await state.get_data('message_id')
