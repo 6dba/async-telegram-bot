@@ -268,7 +268,7 @@ async def edit_button(callback_query: types.CallbackQuery, state: FSMContext):
         if not pills_list:
             await bot.edit_message_text(chat_id=callback_query.from_user.id, message_id=callback_query.message.message_id,text=dialog.None_pills,reply_markup=keyboard.to_main_keyboard, parse_mode='html')
         else:
-            text = "🕓 <u><b>Редактировать время</b></u> 🕓\n\n"
+            text = "<b>Редактировать время</b><\n\n"
             keyboard.confirm_keyboard = InlineKeyboardMarkup(row_width=2)
             for item in pills_list:
                 pill = f"<a href='https://apteka.ru/search/?q={item[1]}'><b>{item[1]}</b></a>:\nКурс длится <b>{item[2]}/{item[3]}</b> дней 🗓\nВремя напоминания: <b>{item[7]}</b> ⏳\n\n"
@@ -287,7 +287,7 @@ async def edit_button(callback_query: types.CallbackQuery, state: FSMContext):
         if not pills_list:
             await bot.edit_message_text(chat_id=callback_query.from_user.id, message_id=callback_query.message.message_id,text=dialog.None_pills,reply_markup=keyboard.to_main_keyboard, parse_mode='html')
         else:
-            text = "🕓 <u><b>Редактировать примечание</b></u> 🕓\n\n"
+            text = "<b>Редактировать примечание</b>\n\n"
             keyboard.confirm_keyboard = InlineKeyboardMarkup(row_width=2)
             for item in pills_list:
                 
