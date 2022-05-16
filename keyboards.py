@@ -11,7 +11,7 @@ class Keyboards():
     mypills = InlineKeyboardButton('Мои препараты 💊', callback_data = 'mypills')
     addplan = InlineKeyboardButton('Создать напоминание ⏱', callback_data = 'addplan')
     delplan = InlineKeyboardButton('Удалить напоминание 🗑', callback_data = 'delplan')
-    confirmplan = InlineKeyboardButton('Подтвердить прием ☑️', callback_data = 'planconfirm')
+    confirmplan = InlineKeyboardButton('Подтвердить прием ✅', callback_data = 'planconfirm')
     edit = InlineKeyboardButton('Настройки ⚙️', callback_data= 'edit')
     main = InlineKeyboardButton('Главное меню 🏛', callback_data= 'menu')
 
